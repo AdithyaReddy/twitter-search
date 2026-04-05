@@ -4,7 +4,7 @@ const fs = require("fs");
 const { spawn } = require("child_process");
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const KEYWORD = "Blinkit";
+const KEYWORD = "Blinkit app";
 const MAX_RESULTS_PER_PAGE = 10; // allowed: 10–100 for recent-search endpoint
 
 // ── Twitter client (read-only, Bearer Token) ──────────────────────────────────
