@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm i:*)",
+      "Bash(env -i HOME=\"$HOME\" PATH=\"/Users/adithya@grofers.com/.nvm/versions/node/v24.11.1/bin:/usr/bin:/bin\" /Users/adithya@grofers.com/.nvm/versions/node/v24.11.1/bin/npm install resend)"
+    ]
+  }
+}

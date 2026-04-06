@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { TwitterApi } = require("twitter-api-v2");
 const fs = require("fs");
+const path = require("path");
 const { spawn } = require("child_process");
 
 // ── Config ────────────────────────────────────────────────────────────────────
@@ -190,7 +191,8 @@ async function main() {
 
   // Write tweets to a dated .txt file
   const dateStr = start.slice(0, 10); // e.g. "2026-04-02"
-  const filename = `blinkit_tweets_${dateStr}.txt`;
+  const outputDir = process.env.OUTPUT_DIR || "/tmp";
+  const filename = `${outputDir}/blinkit_tweets_${dateStr}.txt`;
   const header = `Blinkit tweets for ${dateStr}\nFetched: ${new Date().toISOString()}\nTotal: ${allTweets.length}\n`;
   const body = allTweets.map((t, i) => formatTweet(t, i, authorMap)).join("\n");
   fs.writeFileSync(filename, header + body + "\n");
@@ -199,7 +201,7 @@ async function main() {
   // Run filter_app_feedback.js with the saved file as input
   console.log(`\n🚀  Running filter_app_feedback.js on ${filename}...\n`);
   await new Promise((resolve, reject) => {
-    const child = spawn("node", ["filter_app_feedback.js", filename], {
+    const child = spawn("node", [path.join(__dirname, "filter_app_feedback.js"), filename], {
       stdio: "inherit", // stream output directly to this terminal
     });
     child.on("close", (code) => {

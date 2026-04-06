@@ -4,7 +4,8 @@ const Anthropic = require("@anthropic-ai/sdk").default;
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const INPUT_FILE = process.argv[2] || "blinkit_tweets_2026-04-02.txt";
-const OUTPUT_FILE = "final-app-feedback-tweets.txt";
+const outputDir = process.env.OUTPUT_DIR || "/tmp";
+const OUTPUT_FILE = `${outputDir}/final-app-feedback-tweets.txt`;
 const BATCH_SIZE = 20; // tweets per Claude API call
 
 const SEPARATOR = "─".repeat(60);
